@@ -36,6 +36,11 @@ view: users {
     sql: ${age} ;;
   }
 
+  measure:  average_user_age{
+    type: average
+    sql: ${age} ;;
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
@@ -67,6 +72,23 @@ view: users {
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
+  }
+
+  dimension: full_name {
+    type:  string
+    sql: CONCAT(${TABLE}.firstname, " ", ${TABLE}.lastname) ;;
+  }
+
+  dimension: full_name_length {
+    type: number
+    sql: TO_NUMBER(${full_name}) ;;
+  }
+
+  dimension: age_tier {
+    type: tier
+    tiers: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    style: integer
+    sql: ${age} ;;
   }
 
   dimension: first_name {
