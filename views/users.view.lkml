@@ -76,17 +76,17 @@ view: users {
 
   dimension: full_name {
     type:  string
-    sql: CONCAT(${first_name},' ', ${last_name}) ;;
+    sql: CONCAT(CONCAT(${first_name},' '), ${last_name});;
   }
 
   dimension: full_name_length {
     type: number
-    sql: TO_NUMBER(${full_name}) ;;
+    sql: length(${full_name}) ;;
   }
 
   dimension: age_tier {
     type: tier
-    tiers: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    tiers: [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
     style: integer
     sql: ${age} ;;
   }
